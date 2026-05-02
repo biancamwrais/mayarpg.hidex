@@ -1,0 +1,2 @@
+# mayarpg.hidex
+app completo
