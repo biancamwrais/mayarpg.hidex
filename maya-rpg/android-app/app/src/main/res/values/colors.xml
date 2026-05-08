@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- IDENTIDADE VISUAL MAYA RPG (Anexo I do PI) -->
+    <!-- Primaria (ciano) -->
+    <color name="primary">#3DB5B0</color>
+    <color name="primary_dark">#2A8682</color>
+    <color name="primary_light">#7FCFCB</color>
+
+    <!-- Coral (acentos) -->
+    <color name="coral">#F08372</color>
+    <color name="coral_light">#F5A89C</color>
+
+    <!-- Secundarias -->
+    <color name="bege">#E8DCC8</color>
+    <color name="marrom">#7A4A2A</color>
+    <color name="azul_escuro">#0E5A7C</color>
+
+    <!-- Tela login (gradiente verde-azul escuro) -->
+    <color name="login_bg_top">#0E4A4F</color>
+    <color name="login_bg_bottom">#0A3438</color>
+    <color name="login_input_bg">#1F5A60</color>
+    <color name="login_text">#FFFFFF</color>
+    <color name="login_text_secondary">#B0D8D5</color>
+
+    <!-- Neutros tema claro -->
+    <color name="bg_default">#F5F7F9</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#1A2B3C</color>
+    <color name="text_secondary">#6B7B8C</color>
+    <color name="divider">#E2E8F0</color>
+
+    <!-- Status -->
+    <color name="success">#22C55E</color>
+    <color name="warning">#F59E0B</color>
+    <color name="error">#EF4444</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>

@@ -1,0 +1,3 @@
+rootProject.name = "MayaRPG"
+include ':app'
+include ':app'

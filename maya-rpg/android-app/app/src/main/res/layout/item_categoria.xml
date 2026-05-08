@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp"
+    android:layout_marginEnd="4dp">
+
+    <!-- Container que mantem a forma circular e segura o icone centralizado -->
+    <FrameLayout
+        android:id="@+id/circleBg"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/bg_avatar">
+
+        <ImageView
+            android:id="@+id/ivIcone"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:contentDescription="ícone categoria" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvNomeCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categoria"
+        android:textColor="@color/text_primary"
+        android:textSize="11sp"
+        android:layout_marginTop="6dp" />
+</LinearLayout>

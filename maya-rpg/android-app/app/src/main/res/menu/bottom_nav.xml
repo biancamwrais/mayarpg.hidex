@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 1. Historico (icone grafico) -->
+    <item
+        android:id="@+id/nav_historico"
+        android:icon="@drawable/ic_trending"
+        android:title="Histórico" />
+
+    <!-- 2. Bussola = Meus Exercicios -->
+    <item
+        android:id="@+id/nav_exercicios"
+        android:icon="@drawable/ic_explore"
+        android:title="Exercícios" />
+
+    <!-- 3. Home -->
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Início" />
+
+    <!-- 4. Sino = Notificacoes -->
+    <item
+        android:id="@+id/nav_notificacoes"
+        android:icon="@drawable/ic_bell"
+        android:title="Notif." />
+
+    <!-- 5. Calendario = Agendamento -->
+    <item
+        android:id="@+id/nav_agendamento"
+        android:icon="@drawable/ic_calendar"
+        android:title="Agendar" />
+</menu>

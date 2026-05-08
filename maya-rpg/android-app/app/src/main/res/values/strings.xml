@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MAYA</string>
+    <string name="app_tagline">Maya Yamamoto\nFisioterapia &amp; RPG</string>
+
+    <!-- Login -->
+    <string name="login_email">E-mail</string>
+    <string name="login_senha">Senha</string>
+    <string name="login_esqueceu">Esqueceu a senha?</string>
+    <string name="login_entrar">Entrar</string>
+    <string name="login_ou">ou</string>
+    <string name="login_nao_tem_conta">Não tem uma conta? </string>
+    <string name="login_cadastre_se">Cadastre-se</string>
+    <string name="login_versao">v1.0.0</string>
+
+    <!-- Cadastro -->
+    <string name="cadastro_titulo">Criar Nova Conta</string>
+    <string name="cadastro_subtitulo">Preencha seus dados</string>
+    <string name="cadastro_nome">Nome Completo</string>
+    <string name="cadastro_cpf">CPF (000.000.000-00)</string>
+    <string name="cadastro_telefone">Telefone (00) 00000-0000</string>
+    <string name="cadastro_data_nascimento">dd/mm/aaaa</string>
+    <string name="cadastro_senha_min">Senha (mín. 6 caracteres)</string>
+    <string name="cadastro_confirmar_senha">Confirmar Senha</string>
+    <string name="cadastro_lgpd">Li e aceito os termos de uso e política de privacidade (LGPD)</string>
+    <string name="cadastro_btn">Criar Conta</string>
+    <string name="cadastro_ja_tem">Já tem uma conta? </string>
+    <string name="cadastro_faca_login">Faça login</string>
+    <string name="cadastro_copyright">© 2026 Maya Yamamoto Fisioterapia</string>
+
+    <!-- Home -->
+    <string name="home_saudacao">Olá, %1$s!</string>
+    <string name="home_meu_tratamento">Meu Tratamento</string>
+    <string name="home_dra_subtitle">Dra. Maya Yamamoto - RPG</string>
+    <string name="home_exercicios">Exercícios</string>
+    <string name="home_hoje">Hoje</string>
+    <string name="home_dor_media">Dor Média</string>
+    <string name="home_categorias">Categorias</string>
+    <string name="home_acoes_rapidas">Ações Rápidas</string>
+    <string name="home_meus_exercicios">Meus Exercícios</string>
+    <string name="home_ver_historico">Ver Histórico</string>
+    <string name="home_proximas_consultas">Próximas Consultas</string>
+
+    <!-- Exercicios -->
+    <string name="ex_titulo">Meus Exercícios</string>
+    <string name="ex_subtitulo">Prescritos pela Dra. Maya Yamamoto</string>
+    <string name="ex_ativos">Ativos</string>
+    <string name="ex_esta_semana">Esta semana</string>
+    <string name="ex_adesao">Adesão</string>
+    <string name="ex_prescritos">Exercícios Prescritos</string>
+    <string name="ex_registrar">Registrar Execução</string>
+
+    <!-- Registrar Execucao -->
+    <string name="reg_titulo">Registrar Execução</string>
+    <string name="reg_nivel_dor">Nível de Dor (0 = Sem dor, 10 = Dor intensa)</string>
+    <string name="reg_sem_dor">Sem dor</string>
+    <string name="reg_dor_intensa">Dor intensa</string>
+    <string name="reg_observacoes">Observações (opcional)</string>
+    <string name="reg_obs_hint">Como foi a execução? Sentiu algum desconforto?</string>
+    <string name="reg_instrucoes">Instruções:</string>
+    <string name="reg_confirmar">Confirmar Execução</string>
+
+    <!-- Historico -->
+    <string name="hist_titulo">Histórico</string>
+    <string name="hist_subtitulo">Execuções de exercícios</string>
+    <string name="hist_total">Total</string>
+    <string name="hist_dor_media">Dor Média</string>
+    <string name="hist_tendencia">Tendência</string>
+    <string name="hist_evolucao">Evolução da Dor (últimos 7 dias)</string>
+    <string name="hist_recentes">Execuções Recentes</string>
+
+    <!-- Notificacoes -->
+    <string name="notif_titulo">Notificações</string>
+    <string name="notif_limpar">Limpar tudo</string>
+    <string name="notif_nao_lidas">Não lidas</string>
+    <string name="notif_visualizar">Visualizar</string>
+
+    <!-- Agendamento -->
+    <string name="ag_titulo">Agendamento</string>
+    <string name="ag_subtitulo">Nova consulta</string>
+    <string name="ag_servico">Selecione o Serviço</string>
+    <string name="ag_data">Data</string>
+    <string name="ag_horario">Horário Disponível</string>
+    <string name="ag_info_paciente">Informações do Paciente</string>
+    <string name="ag_nome">Nome completo *</string>
+    <string name="ag_telefone">Telefone * (ex: 11 98765-4321)</string>
+    <string name="ag_email">E-mail (opcional)</string>
+    <string name="ag_limpar">Limpar</string>
+    <string name="ag_confirmar">Confirmar Agendamento</string>
+
+    <!-- Perfil -->
+    <string name="perfil_paciente">Paciente</string>
+    <string name="perfil_info_pessoais">Informações Pessoais</string>
+    <string name="perfil_endereco_clinica">Endereço da Clínica</string>
+    <string name="perfil_historico_pagamentos">Histórico de Pagamentos</string>
+
+    <!-- Categorias -->
+    <string name="cat_alongamento">Alongamento</string>
+    <string name="cat_fortalecimento">Fortalecimento</string>
+    <string name="cat_respiracao">Respiração</string>
+    <string name="cat_mobilidade">Mobilidade</string>
+</resources>
