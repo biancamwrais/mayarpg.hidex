@@ -25,13 +25,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ag_titulo"
-                    android:textColor="@color/azul_escuro"
+                    android:textColor="#01577A"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -47,7 +48,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_person"
-                app:tint="@color/azul_escuro"
+                app:tint="#01577A"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true" />
         </RelativeLayout>

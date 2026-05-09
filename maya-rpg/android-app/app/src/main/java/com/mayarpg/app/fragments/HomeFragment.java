@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment {
     private TextView tvSaudacao, tvTotalEx, tvHoje, tvDorMedia, tvSemConsultas;
     private RecyclerView rvCategorias, rvConsultas;
     private View btnMeusEx, btnVerHist, btnAddConsulta;
+    private ImageView btnPerfil;
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -49,6 +51,7 @@ public class HomeFragment extends Fragment {
         btnMeusEx = v.findViewById(R.id.btnMeusEx);
         btnVerHist = v.findViewById(R.id.btnVerHist);
         btnAddConsulta = v.findViewById(R.id.btnAddConsulta);
+        btnPerfil = v.findViewById(R.id.btnPerfil);
 
         String nome = SessionManager.getInstance(requireContext()).getUserName();
         String primeiroNome = nome != null && nome.contains(" ") ? nome.substring(0, nome.indexOf(' ')) : nome;
@@ -98,6 +101,14 @@ public class HomeFragment extends Fragment {
                 ((MainActivity) getActivity()).selecionarAba(R.id.nav_agendamento);
             }
         });
+
+        if (btnPerfil != null) {
+            btnPerfil.setOnClickListener(v -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).abrirPerfil();
+                }
+            });
+        }
     }
 
     private void abrirExerciciosComFiltro(@Nullable String categoria) {

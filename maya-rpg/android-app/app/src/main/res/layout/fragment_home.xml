@@ -22,11 +22,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/btnPerfil"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_person"
-                app:tint="@color/azul_escuro" />
+                android:id="@+id/btnBuscar"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_search"
+                app:tint="#01577A" />
 
             <TextView
                 android:id="@+id/tvLogoTopo"
@@ -35,21 +35,20 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="MAYA"
-                android:textColor="@color/azul_escuro"
+                android:textColor="#01577A"
                 android:textSize="22sp"
                 android:textStyle="normal"
                 android:fontFamily="sans-serif-light"
                 android:letterSpacing="0.30" />
 
             <ImageView
-                android:id="@+id/btnBuscar"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/ic_search"
-                app:tint="@color/azul_escuro" />
+                android:id="@+id/btnPerfil"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_person"
+                app:tint="#01577A" />
         </LinearLayout>
 
-        <!-- Linha divisoria sutil -->
         <View
             android:id="@+id/divisoriaTopo"
             android:layout_width="match_parent"
@@ -216,10 +215,12 @@
                 android:textStyle="bold"
                 android:layout_marginTop="20dp" />
 
+            <!-- IMPORTANTE: wrap_content + layout_gravity="center_horizontal" centraliza as 4 bolinhas -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategorias"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 android:clipToPadding="false" />

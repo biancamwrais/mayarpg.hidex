@@ -21,44 +21,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvTitulo"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notif_titulo"
-                android:textColor="@color/azul_escuro"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true">
 
-            <TextView
-                android:id="@+id/btnLimpar"
+                <TextView
+                    android:id="@+id/tvTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/notif_titulo"
+                    android:textColor="#01577A"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSubtitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 não lidas"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Acoes a direita -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/notif_limpar"
-                android:textColor="@color/primary"
-                android:textSize="13sp"
-                android:padding="6dp"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/btnPerfil" />
-
-            <ImageView
-                android:id="@+id/btnPerfil"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_person"
-                app:tint="@color/azul_escuro"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true" />
-        </RelativeLayout>
+                android:layout_centerVertical="true">
 
-        <TextView
-            android:id="@+id/tvSubtitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0 não lidas"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp"
-            android:layout_marginTop="2dp" />
+                <TextView
+                    android:id="@+id/btnLimpar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/notif_limpar"
+                    android:textColor="@color/primary"
+                    android:textSize="13sp"
+                    android:padding="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <ImageView
+                    android:id="@+id/btnPerfil"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_person"
+                    app:tint="#01577A" />
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
     <View
@@ -68,7 +82,6 @@
         android:background="@color/divider"
         app:layout_constraintTop_toBottomOf="@id/topoBranco" />
 
-    <!-- Card "Não lidas X" -->
     <LinearLayout
         android:id="@+id/cardNaoLidas"
         android:layout_width="match_parent"

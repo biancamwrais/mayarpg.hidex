@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mayarpg.app.R;
+import com.mayarpg.app.activities.MainActivity;
 import com.mayarpg.app.adapters.ExercicioAdapter;
 import com.mayarpg.app.models.ExerciciosResponse;
 import com.mayarpg.app.network.ApiClient;
@@ -32,10 +33,6 @@ public class ExerciciosFragment extends Fragment {
 
     private static final String ARG_CATEGORIA = "categoria";
 
-    /**
-     * Cria o fragment com filtro de categoria pre-aplicado.
-     * Passe null se quiser mostrar todos os exercicios.
-     */
     public static ExerciciosFragment novaInstancia(@Nullable String categoria) {
         ExerciciosFragment f = new ExerciciosFragment();
         if (categoria != null) {
@@ -50,16 +47,12 @@ public class ExerciciosFragment extends Fragment {
     private TextView tvAtivos, tvSemana, tvAdesao, tvVazioTitulo, tvVazioMsg, tvChipFiltro;
     private LinearLayout boxVazio, chipFiltro;
     private Button btnVerTodos;
-    private ImageView btnFecharChip;
+    private ImageView btnFecharChip, btnPerfil;
     private ProgressBar progress;
 
-    /** Lista completa vinda da API (sem filtro). */
     private final List<ExerciciosResponse.Prescricao> todos = new ArrayList<>();
-    /** Lista exibida apos aplicar o filtro. */
     private final List<ExerciciosResponse.Prescricao> exibidos = new ArrayList<>();
     private ExercicioAdapter adapter;
-
-    /** Categoria do filtro atual (null = sem filtro). */
     private String categoriaFiltro;
 
     @Nullable @Override
@@ -79,8 +72,8 @@ public class ExerciciosFragment extends Fragment {
         chipFiltro = v.findViewById(R.id.chipFiltro);
         tvChipFiltro = v.findViewById(R.id.tvChipFiltro);
         btnFecharChip = v.findViewById(R.id.btnFecharChip);
+        btnPerfil = v.findViewById(R.id.btnPerfil);
 
-        // Le categoria dos arguments (se houver)
         if (getArguments() != null) {
             categoriaFiltro = getArguments().getString(ARG_CATEGORIA);
         }
@@ -102,6 +95,15 @@ public class ExerciciosFragment extends Fragment {
 
         btnFecharChip.setOnClickListener(x -> removerFiltro());
         btnVerTodos.setOnClickListener(x -> removerFiltro());
+
+        // Avatar -> abre Perfil
+        if (btnPerfil != null) {
+            btnPerfil.setOnClickListener(x -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).abrirPerfil();
+                }
+            });
+        }
 
         carregar();
         return v;
@@ -126,10 +128,6 @@ public class ExerciciosFragment extends Fragment {
         aplicarFiltro();
     }
 
-    /**
-     * Aplica o filtro de categoria sobre a lista 'todos' e atualiza UI.
-     * Tambem mostra/esconde o chip e o estado vazio amigavel.
-     */
     private void aplicarFiltro() {
         exibidos.clear();
 
@@ -148,7 +146,6 @@ public class ExerciciosFragment extends Fragment {
         }
         adapter.notifyDataSetChanged();
 
-        // Estado vazio
         if (exibidos.isEmpty()) {
             boxVazio.setVisibility(View.VISIBLE);
             rv.setVisibility(View.GONE);

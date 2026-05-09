@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,27 +24,27 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.mayarpg.app.R;
+import com.mayarpg.app.activities.MainActivity;
 import com.mayarpg.app.adapters.ExecucaoAdapter;
 import com.mayarpg.app.models.HistoricoResponse;
 import com.mayarpg.app.network.ApiClient;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HistoricoFragment extends Fragment {
 
     private TextView tvTotal, tvDorMedia, tvTendencia, tvVazio;
+    private ImageView btnPerfil;
     private LineChart grafico;
     private RecyclerView rv;
     private ExecucaoAdapter adapter;
-    private List<HistoricoResponse.Execucao> dados = new ArrayList<>();
+    private final List<HistoricoResponse.Execucao> dados = new ArrayList<>();
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -56,11 +57,21 @@ public class HistoricoFragment extends Fragment {
         tvVazio = v.findViewById(R.id.tvVazio);
         grafico = v.findViewById(R.id.grafico);
         rv = v.findViewById(R.id.rvExecucoes);
+        btnPerfil = v.findViewById(R.id.btnPerfil);
 
         adapter = new ExecucaoAdapter(dados);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         rv.setNestedScrollingEnabled(false);
         rv.setAdapter(adapter);
+
+        // Avatar -> abre Perfil
+        if (btnPerfil != null) {
+            btnPerfil.setOnClickListener(x -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).abrirPerfil();
+                }
+            });
+        }
 
         configurarGraficoVazio();
         carregar();
@@ -94,7 +105,7 @@ public class HistoricoFragment extends Fragment {
     }
 
     private void carregar() {
-        ApiClient.getApi(requireContext()).historico().enqueue(new Callback<HistoricoResponse>() {
+        ApiClient.getApi(requireContext()).historico().enqueue(new retrofit2.Callback<HistoricoResponse>() {
             @Override
             public void onResponse(Call<HistoricoResponse> call, Response<HistoricoResponse> response) {
                 if (!isAdded()) return;
@@ -128,7 +139,6 @@ public class HistoricoFragment extends Fragment {
             tvDorMedia.setText("—");
         }
 
-        // Tendencia: compara primeira metade com segunda metade do grafico
         if (h.grafico != null && h.grafico.size() >= 2) {
             int meio = h.grafico.size() / 2;
             double mPrim = 0, mUlt = 0;

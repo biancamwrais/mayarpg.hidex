@@ -13,34 +13,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MayaRPG"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!-- Splash: tela inicial do app (LAUNCHER) -->
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.MayaRPG.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Login -->
         <activity
             android:name=".activities.LoginActivity"
             android:exported="false" />
+
+        <!-- Cadastro -->
         <activity
             android:name=".activities.CadastroActivity"
             android:exported="false" />
+
+        <!-- Tela principal apos login -->
         <activity
             android:name=".activities.MainActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

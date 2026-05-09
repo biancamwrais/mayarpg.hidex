@@ -4,21 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="8dp"
-    android:layout_marginEnd="4dp">
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="4dp">
 
-    <!-- Container que mantem a forma circular e segura o icone centralizado -->
     <FrameLayout
         android:id="@+id/circleBg"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:background="@drawable/bg_avatar">
+        android:layout_width="72dp"
+        android:layout_height="72dp">
 
+        <!-- Icone com padding interno para nao escapar da borda -->
         <ImageView
             android:id="@+id/ivIcone"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
             android:scaleType="fitCenter"
             android:contentDescription="ícone categoria" />
     </FrameLayout>
@@ -30,5 +29,6 @@
         android:text="Categoria"
         android:textColor="@color/text_primary"
         android:textSize="11sp"
+        android:gravity="center"
         android:layout_marginTop="6dp" />
 </LinearLayout>

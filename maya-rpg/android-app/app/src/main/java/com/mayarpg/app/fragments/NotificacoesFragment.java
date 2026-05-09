@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mayarpg.app.R;
+import com.mayarpg.app.activities.MainActivity;
 import com.mayarpg.app.adapters.NotificacaoAdapter;
 import com.mayarpg.app.models.Notificacao;
 import com.mayarpg.app.network.ApiClient;
@@ -30,6 +32,7 @@ public class NotificacoesFragment extends Fragment {
 
     private RecyclerView rv;
     private TextView tvSubtitulo, tvBadge, btnLimpar;
+    private ImageView btnPerfil;
     private LinearLayout boxVazio, cardNaoLidas;
     private final List<Notificacao> dados = new ArrayList<>();
     private NotificacaoAdapter adapter;
@@ -45,6 +48,7 @@ public class NotificacoesFragment extends Fragment {
         btnLimpar = v.findViewById(R.id.btnLimpar);
         boxVazio = v.findViewById(R.id.boxVazio);
         cardNaoLidas = v.findViewById(R.id.cardNaoLidas);
+        btnPerfil = v.findViewById(R.id.btnPerfil);
 
         adapter = new NotificacaoAdapter(dados, new NotificacaoAdapter.OnAcao() {
             @Override
@@ -60,6 +64,15 @@ public class NotificacoesFragment extends Fragment {
         rv.setAdapter(adapter);
 
         btnLimpar.setOnClickListener(x -> limparTudo());
+
+        // Avatar -> abre Perfil
+        if (btnPerfil != null) {
+            btnPerfil.setOnClickListener(x -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).abrirPerfil();
+                }
+            });
+        }
 
         carregar();
         return v;
@@ -119,7 +132,6 @@ public class NotificacoesFragment extends Fragment {
                     public void onResponse(Call<Map<String, Object>> call,
                                            Response<Map<String, Object>> response) {
                         if (!isAdded()) return;
-                        // Remove a notificacao da lista localmente
                         int idx = dados.indexOf(n);
                         if (idx >= 0) {
                             dados.remove(idx);

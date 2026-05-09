@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <!-- Centro com 25% de opacidade -->
     <solid android:color="#40CCCCCC" />
-    <!-- Borda 100% opaca -->
     <stroke android:width="3dp" android:color="#CCCCCC" />
 </shape>

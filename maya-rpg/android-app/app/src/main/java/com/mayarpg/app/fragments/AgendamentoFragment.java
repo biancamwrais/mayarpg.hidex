@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.mayarpg.app.R;
+import com.mayarpg.app.activities.MainActivity;
 import com.mayarpg.app.adapters.HorarioAdapter;
 import com.mayarpg.app.models.AgendamentoRequest;
 import com.mayarpg.app.models.HorarioDisponivel;
@@ -43,14 +45,15 @@ public class AgendamentoFragment extends Fragment {
     private RecyclerView rvHorarios;
     private ProgressBar progressHorarios;
     private MaterialButton btnConfirmar, btnLimpar;
+    private ImageView btnPerfil;
 
     private final List<Servico> servicos = new ArrayList<>();
     private final List<HorarioDisponivel> horarios = new ArrayList<>();
     private HorarioAdapter horarioAdapter;
 
     private Integer servicoIdSelecionado;
-    private String dataSelecionada;     // formato yyyy-MM-dd
-    private String horarioSelecionado;  // formato HH:mm
+    private String dataSelecionada;
+    private String horarioSelecionado;
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -65,6 +68,7 @@ public class AgendamentoFragment extends Fragment {
         progressHorarios = v.findViewById(R.id.progressHorarios);
         btnConfirmar = v.findViewById(R.id.btnConfirmar);
         btnLimpar = v.findViewById(R.id.btnLimpar);
+        btnPerfil = v.findViewById(R.id.btnPerfil);
 
         horarioAdapter = new HorarioAdapter(horarios, h -> horarioSelecionado = h);
         rvHorarios.setLayoutManager(new GridLayoutManager(requireContext(), 4));
@@ -73,6 +77,15 @@ public class AgendamentoFragment extends Fragment {
         btnEscolherData.setOnClickListener(x -> abrirDatePicker());
         btnConfirmar.setOnClickListener(x -> confirmar());
         btnLimpar.setOnClickListener(x -> limpar());
+
+        // Avatar -> abre Perfil
+        if (btnPerfil != null) {
+            btnPerfil.setOnClickListener(x -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).abrirPerfil();
+                }
+            });
+        }
 
         carregarServicos();
         return v;
