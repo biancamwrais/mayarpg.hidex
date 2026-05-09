@@ -5,6 +5,11 @@ public class Notificacao {
     public String tipo;
     public String titulo;
     public String mensagem;
-    public Boolean lida;
+    public Integer lida;
     public String criada_em;
+
+    /** Retorna true se a notificacao ja foi lida (lida = 1). */
+    public boolean isLida() {
+        return lida != null && lida == 1;
+    }
 }

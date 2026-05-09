@@ -65,7 +65,6 @@ public class NotificacoesFragment extends Fragment {
 
         btnLimpar.setOnClickListener(x -> limparTudo());
 
-        // Avatar -> abre Perfil
         if (btnPerfil != null) {
             btnPerfil.setOnClickListener(x -> {
                 if (getActivity() instanceof MainActivity) {
@@ -108,7 +107,7 @@ public class NotificacoesFragment extends Fragment {
     private void atualizarUI() {
         int naoLidas = 0;
         for (Notificacao n : dados) {
-            if (n.lida == null || !n.lida) naoLidas++;
+            if (!n.isLida()) naoLidas++;
         }
         tvSubtitulo.setText(naoLidas + " não lida" + (naoLidas == 1 ? "" : "s"));
         tvBadge.setText(String.valueOf(naoLidas));
