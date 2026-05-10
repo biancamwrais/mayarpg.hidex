@@ -21,13 +21,10 @@ import com.mayarpg.app.R;
 import com.mayarpg.app.activities.MainActivity;
 import com.mayarpg.app.adapters.ExercicioAdapter;
 import com.mayarpg.app.models.ExerciciosResponse;
-import com.mayarpg.app.network.ApiClient;
+import com.mayarpg.app.repository.ExerciciosRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class ExerciciosFragment extends Fragment {
 
@@ -55,6 +52,8 @@ public class ExerciciosFragment extends Fragment {
     private ExercicioAdapter adapter;
     private String categoriaFiltro;
 
+    private ExerciciosRepository repository;
+
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -73,6 +72,8 @@ public class ExerciciosFragment extends Fragment {
         tvChipFiltro = v.findViewById(R.id.tvChipFiltro);
         btnFecharChip = v.findViewById(R.id.btnFecharChip);
         btnPerfil = v.findViewById(R.id.btnPerfil);
+
+        repository = new ExerciciosRepository(requireContext());
 
         if (getArguments() != null) {
             categoriaFiltro = getArguments().getString(ARG_CATEGORIA);
@@ -96,7 +97,6 @@ public class ExerciciosFragment extends Fragment {
         btnFecharChip.setOnClickListener(x -> removerFiltro());
         btnVerTodos.setOnClickListener(x -> removerFiltro());
 
-        // Avatar -> abre Perfil
         if (btnPerfil != null) {
             btnPerfil.setOnClickListener(x -> {
                 if (getActivity() instanceof MainActivity) {
@@ -165,48 +165,56 @@ public class ExerciciosFragment extends Fragment {
         }
     }
 
+    private void aplicarDados(ExerciciosResponse er) {
+        todos.clear();
+        if (er.prescricoes != null) todos.addAll(er.prescricoes);
+
+        if (er.estatisticas != null) {
+            int ativos = er.estatisticas.ativos != null ? er.estatisticas.ativos : 0;
+            int semana = er.estatisticas.esta_semana != null ? er.estatisticas.esta_semana : 0;
+            tvAtivos.setText(String.valueOf(ativos));
+            tvSemana.setText(String.valueOf(semana));
+
+            int meta = ativos * 7;
+            int pct = meta > 0 ? Math.min(100, semana * 100 / meta) : 0;
+            tvAdesao.setText(pct + "%");
+        }
+
+        aplicarFiltro();
+    }
+
     private void carregar() {
         progress.setVisibility(View.VISIBLE);
         boxVazio.setVisibility(View.GONE);
 
-        ApiClient.getApi(requireContext()).meusExercicios()
-                .enqueue(new retrofit2.Callback<ExerciciosResponse>() {
-                    @Override
-                    public void onResponse(Call<ExerciciosResponse> call,
-                                           Response<ExerciciosResponse> response) {
-                        if (!isAdded()) return;
-                        progress.setVisibility(View.GONE);
-
-                        if (response.isSuccessful() && response.body() != null) {
-                            ExerciciosResponse er = response.body();
-                            todos.clear();
-                            if (er.prescricoes != null) todos.addAll(er.prescricoes);
-
-                            if (er.estatisticas != null) {
-                                int ativos = er.estatisticas.ativos != null ? er.estatisticas.ativos : 0;
-                                int semana = er.estatisticas.esta_semana != null ? er.estatisticas.esta_semana : 0;
-                                tvAtivos.setText(String.valueOf(ativos));
-                                tvSemana.setText(String.valueOf(semana));
-
-                                int meta = ativos * 7;
-                                int pct = meta > 0 ? Math.min(100, semana * 100 / meta) : 0;
-                                tvAdesao.setText(pct + "%");
-                            }
-
-                            aplicarFiltro();
-                        } else {
-                            Toast.makeText(requireContext(),
-                                    "Erro ao carregar exercícios", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ExerciciosResponse> call, Throwable t) {
-                        if (!isAdded()) return;
-                        progress.setVisibility(View.GONE);
-                        Toast.makeText(requireContext(),
-                                "Falha de conexão", Toast.LENGTH_LONG).show();
-                    }
-                });
+        repository.carregar(new ExerciciosRepository.Callback() {
+            @Override
+            public void onCache(ExerciciosResponse cache) {
+                if (!isAdded()) return;
+                if (cache != null) {
+                    progress.setVisibility(View.GONE);
+                    aplicarDados(cache);
+                }
+            }
+            @Override
+            public void onFresh(ExerciciosResponse fresco) {
+                if (!isAdded()) return;
+                progress.setVisibility(View.GONE);
+                aplicarDados(fresco);
+            }
+            @Override
+            public void onError(String mensagem) {
+                if (!isAdded()) return;
+                progress.setVisibility(View.GONE);
+                if (todos.isEmpty()) {
+                    Toast.makeText(requireContext(),
+                            mensagem, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(requireContext(),
+                            mensagem + " (mostrando dados em cache)",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

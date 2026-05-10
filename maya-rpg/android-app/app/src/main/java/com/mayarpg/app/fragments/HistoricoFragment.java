@@ -27,15 +27,12 @@ import com.mayarpg.app.R;
 import com.mayarpg.app.activities.MainActivity;
 import com.mayarpg.app.adapters.ExecucaoAdapter;
 import com.mayarpg.app.models.HistoricoResponse;
-import com.mayarpg.app.network.ApiClient;
+import com.mayarpg.app.repository.HistoricoRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class HistoricoFragment extends Fragment {
 
@@ -45,6 +42,8 @@ public class HistoricoFragment extends Fragment {
     private RecyclerView rv;
     private ExecucaoAdapter adapter;
     private final List<HistoricoResponse.Execucao> dados = new ArrayList<>();
+
+    private HistoricoRepository repository;
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -59,12 +58,13 @@ public class HistoricoFragment extends Fragment {
         rv = v.findViewById(R.id.rvExecucoes);
         btnPerfil = v.findViewById(R.id.btnPerfil);
 
+        repository = new HistoricoRepository(requireContext());
+
         adapter = new ExecucaoAdapter(dados);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         rv.setNestedScrollingEnabled(false);
         rv.setAdapter(adapter);
 
-        // Avatar -> abre Perfil
         if (btnPerfil != null) {
             btnPerfil.setOnClickListener(x -> {
                 if (getActivity() instanceof MainActivity) {
@@ -105,28 +105,36 @@ public class HistoricoFragment extends Fragment {
     }
 
     private void carregar() {
-        ApiClient.getApi(requireContext()).historico().enqueue(new retrofit2.Callback<HistoricoResponse>() {
+        repository.carregar(new HistoricoRepository.Callback() {
             @Override
-            public void onResponse(Call<HistoricoResponse> call, Response<HistoricoResponse> response) {
+            public void onCache(HistoricoResponse cache) {
                 if (!isAdded()) return;
-                if (response.isSuccessful() && response.body() != null) {
-                    HistoricoResponse h = response.body();
-                    aplicarStats(h);
-                    aplicarGrafico(h);
-                    aplicarLista(h);
+                if (cache != null) aplicarTudo(cache);
+            }
+            @Override
+            public void onFresh(HistoricoResponse fresco) {
+                if (!isAdded()) return;
+                aplicarTudo(fresco);
+            }
+            @Override
+            public void onError(String mensagem) {
+                if (!isAdded()) return;
+                if (dados.isEmpty()) {
+                    Toast.makeText(requireContext(),
+                            mensagem, Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(requireContext(),
-                            "Erro ao carregar histórico", Toast.LENGTH_SHORT).show();
+                            mensagem + " (mostrando dados em cache)",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
-
-            @Override
-            public void onFailure(Call<HistoricoResponse> call, Throwable t) {
-                if (!isAdded()) return;
-                Toast.makeText(requireContext(),
-                        "Falha de conexão", Toast.LENGTH_LONG).show();
-            }
         });
+    }
+
+    private void aplicarTudo(HistoricoResponse h) {
+        aplicarStats(h);
+        aplicarGrafico(h);
+        aplicarLista(h);
     }
 
     private void aplicarStats(HistoricoResponse h) {

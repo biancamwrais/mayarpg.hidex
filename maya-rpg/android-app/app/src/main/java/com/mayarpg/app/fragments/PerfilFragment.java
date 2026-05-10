@@ -1,6 +1,5 @@
 package com.mayarpg.app.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,20 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mayarpg.app.R;
-import com.mayarpg.app.activities.LoginActivity;
 import com.mayarpg.app.adapters.PagamentoAdapter;
 import com.mayarpg.app.models.PagamentosResponse;
 import com.mayarpg.app.models.PerfilResponse;
-import com.mayarpg.app.network.ApiClient;
+import com.mayarpg.app.repository.PerfilRepository;
 import com.mayarpg.app.utils.Formatters;
 import com.mayarpg.app.utils.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class PerfilFragment extends Fragment {
 
@@ -46,6 +41,8 @@ public class PerfilFragment extends Fragment {
     private RecyclerView rvPagamentos;
     private final List<PagamentosResponse.Pagamento> pagamentos = new ArrayList<>();
     private PagamentoAdapter pagAdapter;
+
+    private PerfilRepository repository;
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -74,6 +71,8 @@ public class PerfilFragment extends Fragment {
         seta3 = v.findViewById(R.id.seta3);
         btnTema = v.findViewById(R.id.btnTema);
         rvPagamentos = v.findViewById(R.id.rvPagamentos);
+
+        repository = new PerfilRepository(requireContext());
 
         pagAdapter = new PagamentoAdapter(pagamentos);
         rvPagamentos.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -116,26 +115,27 @@ public class PerfilFragment extends Fragment {
         s.setDarkMode(novo);
         AppCompatDelegate.setDefaultNightMode(
                 novo ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-        // A activity vai recriar automatico
     }
 
     private void carregarPerfil() {
-        ApiClient.getApi(requireContext()).perfil()
-                .enqueue(new retrofit2.Callback<PerfilResponse>() {
-                    @Override
-                    public void onResponse(Call<PerfilResponse> call, Response<PerfilResponse> response) {
-                        if (!isAdded()) return;
-                        if (response.isSuccessful() && response.body() != null) {
-                            preencher(response.body());
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<PerfilResponse> call, Throwable t) {
-                        if (!isAdded()) return;
-                        Toast.makeText(requireContext(),
-                                "Falha ao carregar perfil", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        repository.carregarPerfil(new PerfilRepository.PerfilCallback() {
+            @Override
+            public void onCache(PerfilResponse cache) {
+                if (!isAdded()) return;
+                if (cache != null) preencher(cache);
+            }
+            @Override
+            public void onFresh(PerfilResponse fresco) {
+                if (!isAdded()) return;
+                preencher(fresco);
+            }
+            @Override
+            public void onError(String mensagem) {
+                if (!isAdded()) return;
+                Toast.makeText(requireContext(),
+                        mensagem, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void preencher(PerfilResponse pr) {
@@ -179,29 +179,38 @@ public class PerfilFragment extends Fragment {
     }
 
     private void carregarPagamentos() {
-        ApiClient.getApi(requireContext()).pagamentos()
-                .enqueue(new retrofit2.Callback<PagamentosResponse>() {
-                    @Override
-                    public void onResponse(Call<PagamentosResponse> call,
-                                           Response<PagamentosResponse> response) {
-                        if (!isAdded()) return;
-                        if (response.isSuccessful() && response.body() != null) {
-                            PagamentosResponse pr = response.body();
-                            pagamentos.clear();
-                            if (pr.pagamentos != null) pagamentos.addAll(pr.pagamentos);
-                            pagAdapter.notifyDataSetChanged();
+        repository.carregarPagamentos(new PerfilRepository.PagamentosCallback() {
+            @Override
+            public void onCache(PagamentosResponse cache) {
+                if (!isAdded()) return;
+                if (cache != null) aplicarPagamentos(cache);
+            }
+            @Override
+            public void onFresh(PagamentosResponse fresco) {
+                if (!isAdded()) return;
+                aplicarPagamentos(fresco);
+            }
+            @Override
+            public void onError(String mensagem) {
+                if (!isAdded()) return;
+                // Falha silenciosa - se ja tem cache, apenas mantem
+            }
+        });
+    }
 
-                            double total = pr.total != null ? pr.total : 0.0;
-                            tvTotalPago.setText("R$ " +
-                                    String.format(Locale.US, "%.2f", total).replace('.', ','));
+    private void aplicarPagamentos(PagamentosResponse pr) {
+        pagamentos.clear();
+        if (pr.pagamentos != null) pagamentos.addAll(pr.pagamentos);
+        pagAdapter.notifyDataSetChanged();
 
-                            if (pagamentos.isEmpty()) {
-                                tvSemPagamentos.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<PagamentosResponse> call, Throwable t) {}
-                });
+        double total = pr.total != null ? pr.total : 0.0;
+        tvTotalPago.setText("R$ " +
+                String.format(Locale.US, "%.2f", total).replace('.', ','));
+
+        if (pagamentos.isEmpty()) {
+            tvSemPagamentos.setVisibility(View.VISIBLE);
+        } else {
+            tvSemPagamentos.setVisibility(View.GONE);
+        }
     }
 }
