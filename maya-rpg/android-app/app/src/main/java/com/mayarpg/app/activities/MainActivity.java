@@ -16,16 +16,6 @@ import com.mayarpg.app.fragments.NotificacoesFragment;
 import com.mayarpg.app.fragments.PerfilFragment;
 import com.mayarpg.app.utils.SessionManager;
 
-/**
- * Tela principal. Hospeda os 5 fragments via Bottom Navigation:
- *  - Historico    -> HistoricoFragment
- *  - Bussola      -> ExerciciosFragment (sem filtro)
- *  - Home         -> HomeFragment
- *  - Sino         -> NotificacoesFragment
- *  - Calendario   -> AgendamentoFragment
- *
- * O Perfil e acessado pelos icones de avatar no topo de cada tela.
- */
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
@@ -34,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Aplica o tema (claro/escuro) salvo nas preferencias
+        // Aplica o tema
         boolean dark = SessionManager.getInstance(this).isDarkMode();
         AppCompatDelegate.setDefaultNightMode(
                 dark ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
@@ -80,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setSelectedItemId(menuId);
     }
 
-    /** Chamado pelos avatars no topo das telas para abrir o Perfil. */
+
     public void abrirPerfil() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, new PerfilFragment())

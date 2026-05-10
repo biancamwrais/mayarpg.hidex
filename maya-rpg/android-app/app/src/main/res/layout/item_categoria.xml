@@ -12,7 +12,7 @@
         android:layout_width="72dp"
         android:layout_height="72dp">
 
-        <!-- Icone com padding interno para nao escapar da borda -->
+
         <ImageView
             android:id="@+id/ivIcone"
             android:layout_width="match_parent"

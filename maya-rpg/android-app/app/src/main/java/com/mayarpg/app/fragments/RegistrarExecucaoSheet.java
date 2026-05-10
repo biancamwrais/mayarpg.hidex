@@ -26,10 +26,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Response;
 
-/**
- * Bottom sheet que aparece ao clicar em "Registrar Execução".
- * Permite o paciente registrar nivel de dor (0-10), observacoes e ver as instrucoes.
- */
 public class RegistrarExecucaoSheet extends BottomSheetDialogFragment {
 
     private static final String ARG_PRESCRICAO_ID = "prescricaoId";
@@ -37,7 +33,7 @@ public class RegistrarExecucaoSheet extends BottomSheetDialogFragment {
     private static final String ARG_CATEGORIA = "categoria";
     private static final String ARG_INSTRUCOES = "instrucoes";
 
-    /** Interface usada para avisar o fragment pai quando uma execucao for registrada. */
+
     public interface OnRegistradoCallback {
         void onRegistrado();
     }
@@ -99,7 +95,7 @@ public class RegistrarExecucaoSheet extends BottomSheetDialogFragment {
         tvNomeEx.setText(titulo);
         tvCategoriaEx.setText(categoria);
 
-        // Formata instrucoes em bullets (instrucoes vem com \n separando)
+
         if (instrucoes != null && !instrucoes.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             for (String linha : instrucoes.split("\n")) {

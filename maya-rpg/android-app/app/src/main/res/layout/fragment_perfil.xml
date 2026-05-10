@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Cabecalho do paciente -->
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- INFORMACOES PESSOAIS (expansivel) -->
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- ENDERECO DA CLINICA (expansivel) -->
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -309,7 +309,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- HISTORICO DE PAGAMENTOS (expansivel) -->
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

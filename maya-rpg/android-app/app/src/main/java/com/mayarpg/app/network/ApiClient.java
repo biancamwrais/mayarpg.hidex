@@ -12,8 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    // IMPORTANTE: Para emulador Android, use 10.0.2.2 (que aponta para localhost da maquina)
-    // Para celular fisico, use o IP da sua maquina na rede local (ex: 192.168.0.10:3000)
+
     public static final String BASE_URL = "http://192.168.0.159:3000/api/";
 
     private static Retrofit retrofit;
@@ -23,7 +22,7 @@ public class ApiClient {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-            // Interceptor que adiciona o token JWT em todas as requisicoes
+
             Interceptor authInterceptor = chain -> {
                 String token = SessionManager.getInstance(context).getToken();
                 okhttp3.Request.Builder builder = chain.request().newBuilder();

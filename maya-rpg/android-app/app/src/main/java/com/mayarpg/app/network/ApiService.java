@@ -28,29 +28,29 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    // ---- Autenticacao ----
+    // Autenticacao
     @POST("auth/login")
     Call<LoginResponse> login(@Body LoginRequest body);
 
     @POST("auth/cadastro")
     Call<Map<String, String>> cadastro(@Body CadastroRequest body);
 
-    // ---- Dashboard / Home ----
+    // Home
     @GET("pacientes/me/dashboard")
     Call<DashboardResponse> dashboard();
 
-    // ---- Exercicios ----
+    // Exercicios
     @GET("pacientes/me/exercicios")
     Call<ExerciciosResponse> meusExercicios();
 
     @POST("execucoes")
     Call<Map<String, Object>> registrarExecucao(@Body ExecucaoRequest body);
 
-    // ---- Historico ----
+    // Historico
     @GET("pacientes/me/historico")
     Call<HistoricoResponse> historico();
 
-    // ---- Notificacoes ----
+    // Notificacoes
     @GET("pacientes/me/notificacoes")
     Call<List<Notificacao>> notificacoes();
 
@@ -60,7 +60,7 @@ public interface ApiService {
     @DELETE("notificacoes")
     Call<Map<String, Object>> limparNotificacoes();
 
-    // ---- Agendamento ----
+    // Agendamento
     @GET("servicos")
     Call<List<Servico>> servicos();
 
@@ -70,7 +70,7 @@ public interface ApiService {
     @POST("agendamentos")
     Call<Map<String, Object>> criarAgendamento(@Body AgendamentoRequest body);
 
-    // ---- Perfil ----
+    // Perfil
     @GET("pacientes/me/perfil")
     Call<PerfilResponse> perfil();
 

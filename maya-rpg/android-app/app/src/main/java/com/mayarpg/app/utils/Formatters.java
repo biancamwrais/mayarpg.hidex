@@ -7,9 +7,6 @@ import android.widget.EditText;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-/**
- * Formatadores e validadores comuns.
- */
 public class Formatters {
 
     public static String formatDataBr(String iso) {
@@ -45,7 +42,7 @@ public class Formatters {
         return email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    /** Mascara CPF: 000.000.000-00 */
+
     public static void aplicarMascaraCpf(final EditText et) {
         et.addTextChangedListener(new TextWatcher() {
             boolean ignorar = false;
@@ -69,7 +66,7 @@ public class Formatters {
         });
     }
 
-    /** Mascara telefone: (00) 00000-0000 */
+
     public static void aplicarMascaraTelefone(final EditText et) {
         et.addTextChangedListener(new TextWatcher() {
             boolean ignorar = false;
@@ -95,7 +92,7 @@ public class Formatters {
         });
     }
 
-    /** Mascara data: dd/mm/aaaa */
+
     public static void aplicarMascaraData(final EditText et) {
         et.addTextChangedListener(new TextWatcher() {
             boolean ignorar = false;
@@ -118,7 +115,7 @@ public class Formatters {
         });
     }
 
-    /** Converte dd/mm/aaaa -> aaaa-mm-dd para enviar a API */
+
     public static String dataBrParaIso(String br) {
         if (br == null) return null;
         String d = br.replaceAll("\\D", "");

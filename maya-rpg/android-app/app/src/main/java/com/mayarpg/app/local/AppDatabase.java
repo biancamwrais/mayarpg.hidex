@@ -11,14 +11,6 @@ import com.mayarpg.app.local.dao.DashboardDao;
 import com.mayarpg.app.local.entities.CacheJson;
 import com.mayarpg.app.local.entities.DashboardCache;
 
-/**
- * Banco de dados local (SQLite via Room).
- *
- * Versao 2: adicionada a tabela cache_json para guardar respostas de API genericas
- *           (exercicios, historico, perfil, pagamentos).
- *
- * Mantemos DashboardCache como entidade dedicada por compatibilidade com a Parte 1.
- */
 @Database(
     entities = { DashboardCache.class, CacheJson.class },
     version = 2,

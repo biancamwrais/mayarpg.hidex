@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:background="@color/surface">
 
-        <!-- Thumbnail com overlay -->
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="160dp"
@@ -31,7 +31,7 @@
                 android:layout_height="match_parent"
                 android:background="#33000000" />
 
-            <!-- Tag categoria (canto superior esquerdo) -->
+
             <TextView
                 android:id="@+id/tagCategoria"
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                 android:textStyle="bold"
                 android:text="Alongamento" />
 
-            <!-- Botao play central -->
+
             <FrameLayout
                 android:layout_width="64dp"
                 android:layout_height="64dp"
@@ -61,7 +61,7 @@
             </FrameLayout>
         </FrameLayout>
 
-        <!-- Conteudo -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                     android:layout_marginStart="6dp" />
             </LinearLayout>
 
-            <!-- Botao Registrar Execucao -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

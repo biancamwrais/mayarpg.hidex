@@ -8,7 +8,6 @@ public class Notificacao {
     public Integer lida;
     public String criada_em;
 
-    /** Retorna true se a notificacao ja foi lida (lida = 1). */
     public boolean isLida() {
         return lida != null && lida == 1;
     }

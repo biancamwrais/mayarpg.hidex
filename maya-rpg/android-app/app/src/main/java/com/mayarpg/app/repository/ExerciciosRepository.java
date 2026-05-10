@@ -30,11 +30,11 @@ public class ExerciciosRepository {
     }
 
     public void carregar(Callback cb) {
-        // 1. Cache
+        // Cache
         ExerciciosResponse local = cache.buscar(chave(), ExerciciosResponse.class);
         cb.onCache(local);
 
-        // 2. Backend
+        // Backend
         ApiClient.getApi(context).meusExercicios()
                 .enqueue(new retrofit2.Callback<ExerciciosResponse>() {
                     @Override

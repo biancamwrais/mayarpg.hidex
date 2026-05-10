@@ -3,9 +3,7 @@ package com.mayarpg.app.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Gerencia sessao do usuario logado (JWT + dados basicos) usando SharedPreferences.
- */
+
 public class SessionManager {
 
     private static final String PREF = "maya_session";

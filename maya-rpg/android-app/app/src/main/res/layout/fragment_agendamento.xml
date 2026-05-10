@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_default">
 
-    <!-- Faixa branca topo -->
+
     <LinearLayout
         android:id="@+id/topoBranco"
         android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                     android:layout_marginStart="10dp" />
             </LinearLayout>
 
-            <!-- Horarios -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

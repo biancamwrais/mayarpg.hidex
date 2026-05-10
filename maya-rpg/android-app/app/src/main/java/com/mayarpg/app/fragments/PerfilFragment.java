@@ -193,7 +193,7 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onError(String mensagem) {
                 if (!isAdded()) return;
-                // Falha silenciosa - se ja tem cache, apenas mantem
+
             }
         });
     }

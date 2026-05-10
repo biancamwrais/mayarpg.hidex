@@ -22,7 +22,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.VH> 
         public int iconeRes;
         public int bgRes;
 
-        /** Construtor com drawable de fundo customizado (preferido). */
+
         public Categoria(String nome, @DrawableRes int bgRes, @DrawableRes int iconeRes) {
             this.nome = nome;
             this.bgRes = bgRes;
@@ -52,12 +52,12 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.VH> 
         Categoria c = itens.get(pos);
         h.tvNome.setText(c.nome);
 
-        // Background do circulo (borda + interior translucido)
+
         if (c.bgRes != 0) {
             h.circle.setBackgroundResource(c.bgRes);
         }
 
-        // Icone centralizado dentro do circulo
+
         if (c.iconeRes != 0) {
             h.ivIcone.setImageResource(c.iconeRes);
             h.ivIcone.setVisibility(View.VISIBLE);

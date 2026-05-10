@@ -49,10 +49,10 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.VH> 
                 ? p.duracao_minutos + " minutos" : "—");
         h.tvFrequencia.setText(p.frequencia != null ? p.frequencia : "");
 
-        // Cor da tag conforme categoria
+
         h.tagCategoria.setBackground(corPorCategoria(p.categoria));
 
-        // Carrega imagem (se houver)
+
         if (p.imagem_url != null && !p.imagem_url.isEmpty()) {
             Glide.with(h.itemView.getContext())
                     .load(p.imagem_url)

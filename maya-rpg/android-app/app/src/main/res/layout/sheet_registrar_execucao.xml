@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/surface">
 
-    <!-- Conteudo rolavel -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Header -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                     app:tint="@color/text_secondary" />
             </LinearLayout>
 
-            <!-- Card titulo do exercicio -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- Slider de dor -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Observacoes -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                 android:inputType="textMultiLine|textCapSentences"
                 android:textSize="13sp" />
 
-            <!-- Instrucoes -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Botao Confirmar FIXO no rodape (sempre visivel) -->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -186,7 +186,7 @@
         android:padding="16dp"
         android:background="@color/surface">
 
-        <!-- IMPORTANTE: usando MaterialButton com backgroundTint pra forcar a cor -->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnConfirmar"
             android:layout_width="match_parent"

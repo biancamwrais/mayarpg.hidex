@@ -10,11 +10,6 @@ import com.mayarpg.app.utils.SessionManager;
 import retrofit2.Call;
 import retrofit2.Response;
 
-/**
- * Repository de perfil e pagamentos. Sao 2 endpoints separados
- * mas como sempre sao chamados juntos na tela de perfil,
- * agrupei aqui pra simplificar.
- */
 public class PerfilRepository {
 
     public interface PerfilCallback {
